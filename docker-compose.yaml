@@ -5,7 +5,7 @@ services:
    image: nginx:1.13
    restart: always
    ports:
-   - 80:80
+   - 8080:80
    - 443:443
    volumes:
    - ./nginx/conf.d:/etc/nginx/conf.d
@@ -26,12 +26,12 @@ services:
   app:
     restart: always
     build: ./app
-    working_dir: /app
-    volumes:
-      - ./app:/app
-      - ~/.m2:/root/.m2
-    expose:
-      - "8080"
-    command: mvn clean spring-boot:run
+    # working_dir: /app
+    # volumes:
+    #   - ./app:/app
+    #   - ~/.m2:/root/.m2
+    # expose:
+    #   - "8080"
+    # command: mvn clean spring-boot:run
     depends_on:
       - mysql

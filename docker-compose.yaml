@@ -9,6 +9,8 @@ services:
    - 443:443
    volumes:
    - ./nginx/conf.d:/etc/nginx/conf.d
+   networks:
+   - front-tier
    depends_on:
    - app
  
@@ -22,7 +24,9 @@ services:
    ports:
    - "3306:3306"
    restart: always
-  
+   networks:
+   - back-tier  
+
   app:
     restart: always
     build: ./app
@@ -33,5 +37,12 @@ services:
     # expose:
     #   - "8080"
     # command: mvn clean spring-boot:run
+    networks:
+    - front-tier
+    - back-tier  
     depends_on:
       - mysql
+
+networks:
+  front-tier:
+  back-tier:
